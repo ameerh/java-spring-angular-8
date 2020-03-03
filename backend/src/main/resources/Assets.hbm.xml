@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.reliant.value.test.model.Assets" table="ASSETS" schema="public" catalog="java_test">
+        <id name="id">
+            <column name="ID" sql-type="bigint"/>
+        </id>
+        <property name="num">
+            <column name="NUM" sql-type="integer"/>
+        </property>
+        <property name="description">
+            <column name="DESCRIPTION" sql-type="varchar(255)"/>
+        </property>
+        <property name="lifeYears">
+            <column name="LIFE_YEARS" sql-type="integer"/>
+        </property>
+        <property name="rangeMin">
+            <column name="RANGE_MIN" sql-type="integer"/>
+        </property>
+        <property name="rangeMax">
+            <column name="RANGE_MAX" sql-type="integer"/>
+        </property>
+        <property name="depreciationCode">
+            <column name="DEPRECIATION_CODE" sql-type="char(2)" length="2"/>
+        </property>
+        <property name="olv">
+            <column name="OLV" sql-type="numeric(5,2)" precision="5" scale="2" not-null="true"/>
+        </property>
+        <property name="flv">
+            <column name="FLV" sql-type="numeric(5,2)" precision="5" scale="2" not-null="true"/>
+        </property>
+    </class>
+</hibernate-mapping>

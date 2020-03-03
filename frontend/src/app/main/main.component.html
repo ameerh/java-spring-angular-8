@@ -1,0 +1,132 @@
+<app-menu></app-menu>
+
+<div class="row">
+  <div class="container col-lg-6">
+    <div class="card">
+      <div class="card-body">
+        <form class="form-group" [formGroup]="assetValuationForm">
+          <div class="form-group">
+            <label for="assets">Asset</label>
+            <div class="form-control asset-dd" >
+              <ng-select [items]="assets$ | async"
+              bindLabel="description"
+              formControlName="asset"
+              autofocus
+              bindValue="id"
+              [(ngModel)]="asset">
+              </ng-select>
+            </div>
+
+          </div>
+          <div class="form-group">
+            <label for="pwd">New Price</label>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">$</span>
+              </div>
+              <input type="text" class="form-control" [(ngModel)]="new_price" id="new_price" placeholder="New Price"
+                formControlName="new_price" mask="separator.2" thousandSeparator=",">  
+              <div class="input-group-append">
+                <span class="input-group-text">.00</span>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="pwd">Year</label>
+            <input type="number" min="1950" max="{{currentYear}}" 
+              oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength); if(this.value > 2020) {this.value = 2020; alert('year cannot be in future');}" maxlength="4" class="form-control" [(ngModel)]="year" id="year" placeholder="2020"
+              [attr.min]="0" [attr.max]="10" [min]="0" [max]="10"
+              formControlName="year">
+          </div>
+          <div class="form-group">
+            <label for="pwd">Condition</label>
+            <select 
+                formControlName="condition" 
+                id="condition" 
+                class="form-control"
+                [(ngModel)]="condition">
+                <option *ngFor="let c of conditions" [value]="c.condition">{{ c.condition }}</option>
+            </select>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="container col-lg-6">
+    <div class="card">
+      <div class="card-body">
+          <div class="form-group">
+            <label for="fmv">Fair Market Value</label>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">$</span>
+              </div>
+              <input type="text" class="form-control" [(ngModel)]="fmv" id="fmv" placeholder="Fair Market Value"
+                name="fmv" mask="separator.2" thousandSeparator=",">  
+              <div class="input-group-append">
+                <span class="input-group-text">.00</span>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="olv">Orderly Liquidition Value</label>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">$</span>
+              </div>
+              <input type="text" class="form-control" [(ngModel)]="olv" id="olv" placeholder="Orderly Liquidition Value"
+                name="olv" mask="separator.2" thousandSeparator=",">  
+              <div class="input-group-append">
+                <span class="input-group-text">.00</span>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="fv">Forced Value</label>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">$</span>
+              </div>
+              <input type="text" class="form-control" [(ngModel)]="fv" id="fv" placeholder="Forced Value"
+                name="fv" mask="separator.2" thousandSeparator=",">  
+              <div class="input-group-append">
+                <span class="input-group-text">.00</span>
+              </div>
+            </div>
+          </div>
+          <button (click)=saveValuation() class="btn btn-success">Add to List</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="container">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Asset</th>
+          <th scope="col">Fair Market</th>
+          <th scope="col">Orderly Liquidition Value</th>
+          <th scope="col">Forced Value</th>
+          <th scope="col">Remaining Useful Life</th>
+          <th scope="col">Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of valuations;  let i = index">
+          <td>{{item.asset}}</td>
+          <td>{{item.fmv}}</td>
+          <td>{{item.olv}}</td>
+          <td>{{item.fv}}</td>
+          <td>{{item.remainingLife}}</td>
+          <td>
+            <button (click)=deleteValuation(i) class="btn btn-danger">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
