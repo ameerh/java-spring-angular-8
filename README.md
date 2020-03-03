@@ -1,1 +1,3 @@
-# java-spring-angular-8
+# java-spring-boot-angular-8
+
+Asset Valuation Calculator
